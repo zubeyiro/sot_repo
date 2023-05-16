@@ -1,0 +1,23 @@
+name: Sync to Target
+on:
+    push:
+        branches:
+            - main
+jobs:
+    sync-docs:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+              with:
+                  fetch-depth: 0
+
+            - uses: mailchain/copybara-action@1.0
+              with:
+                  ssh_key: ${{ secrets.SSH_KEY }}
+                  access_token: ${{ secrets.ACCESS_TOKEN }}
+                  sot_repo: zubeyir/sot_repo
+                  destination_repo: zubeyiro/targ_repo
+                  push_include: 'apps/docs/**'
+                  pr_include: '**'
+                  push_move: |
+                      apps/docs||
