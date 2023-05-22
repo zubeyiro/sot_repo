@@ -21,3 +21,4 @@ jobs:
                   pr_include: '**'
                   push_move: |
                       apps/docs||
+                  copybara_options: --force --init-history
